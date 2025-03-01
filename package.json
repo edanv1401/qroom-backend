@@ -1,0 +1,24 @@
+{
+  "name": "qroom-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edanv1401/qroom-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edanv1401/qroom-backend/issues"
+  },
+  "homepage": "https://github.com/edanv1401/qroom-backend#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.2",
+    "qr-image": "^3.2.0"
+  }
+}
