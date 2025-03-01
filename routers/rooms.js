@@ -9,7 +9,7 @@ const roomRouter = express.Router();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 roomRouter.get('/generate/qr', (req, res) => {
-    const url = `${req.protocol}://${req.get('host')}/vinculate`;
+    const url = `${req.protocol}://${req.get('host')}/rooms/vinculate`;
     const qrImage = qr.image(url, { type: 'png' });
     res.type('png');
     qrImage.pipe(res);
@@ -22,7 +22,7 @@ roomRouter.get('/vinculate', (req, res) => {
 
 roomRouter.post('/vinculate', (req, res) => {
     const email = req.body.email;
-    res.send(`¡Vinculación exitosa! Email: ${email}`);
+    res.send(`The student with email: ${email} successfully linked to the class`);
 });
 
 export default roomRouter;
