@@ -5,34 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class Linking | ITC</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <style>
         @layer base {
-            :root {
-                --background: 0 0% 100%;
-                --foreground: 222.2 84% 4.9%;
-                --card: 0 0% 100%;
-                --card-foreground: 222.2 84% 4.9%;
-                --popover: 0 0% 100%;
-                --popover-foreground: 222.2 84% 4.9%;
-                --primary: 221.2 83.2% 53.3%;
-                --primary-foreground: 210 40% 98%;
-                --secondary: 210 40% 96.1%;
-                --secondary-foreground: 222.2 47.4% 11.2%;
-                --muted: 210 40% 96.1%;
-                --muted-foreground: 215.4 16.3% 46.9%;
-                --accent: 210 40% 96.1%;
-                --accent-foreground: 222.2 47.4% 11.2%;
-                --destructive: 0 84.2% 60.2%;
-                --destructive-foreground: 210 40% 98%;
-                --border: 214.3 31.8% 91.4%;
-                --input: 214.3 31.8% 91.4%;
-                --ring: 221.2 83.2% 53.3%;
+            * {
                 --radius: 0.5rem;
-            }
-
-            .dark {
                 --background: 222.2 84% 4.9%;
                 --foreground: 210 40% 98%;
                 --card: 222.2 84% 4.9%;
@@ -62,19 +40,19 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: hsl(var(--background));
-            color: hsl(var(--foreground));
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
+            font-family: 'Inter', sans-serif !important;
+            background: hsl(var(--background)) !important;
+            color: hsl(var(--foreground)) !important;
+            min-height: 100vh !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 1rem !important;
         }
 
         .card {
             position: relative;
-            margin-top: 4rem; 
+            margin-top: 4rem;
             background: hsl(var(--card));
             color: hsl(var(--card-foreground));
             border-radius: calc(var(--radius) - 2px);
@@ -104,38 +82,38 @@
         }
 
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1rem !important;
         }
 
         label {
             display: block;
-            font-size: 0.875rem;
-            line-height: 1.25rem;
-            font-weight: 500;
-            color: hsl(var(--foreground));
-            margin-bottom: 0.5rem;
+            font-size: 0.875rem !important;
+            line-height: 1.25rem !important;
+            font-weight: 500 !important;
+            color: hsl(var(--foreground)) !important;
+            margin-bottom: 0.5rem !important;
         }
 
         input {
             width: 100%;
-            padding: 0.5rem 0.75rem;
-            border: 1px solid hsl(var(--input));
-            border-radius: calc(var(--radius) - 4px);
-            background: hsl(var(--background));
-            color: hsl(var(--foreground));
-            font-size: 0.875rem;
-            line-height: 1.25rem;
-            transition: border-color 0.2s;
+            padding: 0.5rem 0.75rem !important;
+            border: 1px solid hsl(var(--input)) !important;
+            border-radius: calc(var(--radius) - 4px) !important;
+            background: hsl(var(--background)) !important;
+            color: hsl(var(--foreground)) !important;
+            font-size: 0.875rem !important;
+            line-height: 1.25rem !important;
+            transition: border-color 0.2s !important;
         }
 
         input:focus {
-            outline: none;
-            border-color: hsl(var(--ring));
-            box-shadow: 0 0 0 2px hsl(var(--ring) / 0.1);
+            outline: none !important;
+            border-color: hsl(var(--ring)) !important;
+            box-shadow: 0 0 0 2px hsl(var(--ring) / 0.1) !important;
         }
 
         button {
-            width: 100% !important;
+            width: 100%;
             padding: 0.5rem 1rem !important;
             background: hsl(var(--primary)) !important;
             color: hsl(0 0 0) !important;
@@ -145,7 +123,6 @@
             font-weight: 500 !important;
             cursor: pointer !important;
             transition: all 0.2s !important;
-            display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
             gap: 0.5rem !important;
@@ -154,16 +131,6 @@
         button:hover {
             background: hsl(var(--secondary) / 0.5) !important;
             color: white !important;
-        }
-
-        .swal2-popup {
-            background: hsl(var(--card)) !important;
-            color: hsl(var(--card-foreground)) !important;
-            border: 1px solid hsl(var(--border)) !important;
-        }
-
-        .swal2-title {
-            color: hsl(var(--card-foreground)) !important;
         }
 
         .logo-container {
@@ -177,7 +144,7 @@
             border: 2px solid hsl(var(--border));
             background: hsl(var(--card));
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             z-index: 1;
         }
 
@@ -192,11 +159,9 @@
 <body class="dark">
     <div class="card">
         <div class="logo-container">
-            <img src="https://colombiaestudia.com/wp-content/uploads/2021/12/1154.png" 
-                 alt="ITC Logo" 
-                 class="logo-img">
+            <img src="https://colombiaestudia.com/wp-content/uploads/2021/12/1154.png" alt="ITC Logo" class="logo-img">
         </div>
-        
+
         <div class="card-header">
             <h2 class="card-title">Class Linking</h2>
             <p class="card-description">Enter your institutional email to join the class</p>
@@ -205,15 +170,11 @@
         <form id="vinculateForm">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" required placeholder="student@itc.edu.co" pattern=".+@itc\.edu\.co">
+                <input type="email" id="email" required placeholder="student/teacher@itc.edu.co"
+                    pattern=".+@itc\.edu\.co">
             </div>
 
             <button type="submit">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2">
-                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-                </svg>
                 Link Account
             </button>
         </form>
@@ -226,24 +187,48 @@
             const email = document.getElementById('email').value;
             const roomId = window.location.pathname.split('/').pop();
 
-            fetch(`/vinculate/${roomId}`, {
+            fetch(`/rooms/vinculate/${roomId}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email })
             })
                 .then(response => {
-                    if (response.ok) return response.text();
+                    if (response.ok) return response.json();
                     throw new Error('Failed to link account');
                 })
-                .then(() => {
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'Account linked successfully',
-                        icon: 'success',
-                        background: 'hsl(var(--card))',
-                        color: 'hsl(var(--card-foreground))',
-                        confirmButtonColor: 'hsl(var(--primary))'
-                    });
+                .then((response) => {
+                    if (response.role === 'teacher') {
+                        Swal.fire({
+                            title: response.subject,
+                            text: 'What is the topic of the day?',
+                            input: "text",
+                            icon: 'info',
+                            preConfirm: async (topicDay) => {
+                            },
+                            allowOutsideClick: () => !Swal.isLoading(),
+                            background: 'hsl(var(--card))',
+                            color: 'hsl(var(--card-foreground))',
+                            confirmButtonColor: 'hsl(var(--primary))',
+                            confirmButtonText: "Start class",
+                            showCancelButton: true,
+                        });
+                    } else {
+                        let message = '';
+                        let icon = 'success'
+                        console.log(response);
+                        if (!response.start) {
+                            message = 'class has not started';
+                            icon = 'warning';
+                        }
+                        Swal.fire({
+                            title: 'Success!',
+                            text: message,
+                            icon: icon,
+                            background: 'hsl(var(--card))',
+                            color: 'hsl(var(--card-foreground))',
+                            confirmButtonColor: 'hsl(var(--primary))',
+                        });
+                    }
                     document.getElementById('email').value = '';
                 })
                 .catch(error => {
