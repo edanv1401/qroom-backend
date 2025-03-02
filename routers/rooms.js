@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url';
 
 const roomRouter = express.Router();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const teachers = process.env.TEACHERS ?? [];
+const teachers = (process.env.TEACHERS ?? "").split(",");
 const rooms = {
     1: {
         'subject': 'English',
@@ -41,6 +41,21 @@ roomRouter.post('/vinculate/:roomId', (req, res) => {
         response.role = 'teacher';
     }
     res.send(response);
+});
+
+roomRouter.post('/assign-topic', (req, res) => {
+    console.log(req.body);
+    const { roomId, topic } = req.body;
+    rooms[roomId].topic = topic;
+    rooms[roomId].start = true;
+    res.send(rooms[roomId]);
+});
+
+roomRouter.get('/reset/:roomId', (req, res) => {
+    const roomId = req.params.roomId;
+    rooms[roomId].start = false;
+    rooms[roomId].topic = '';
+    res.send(rooms);
 });
 
 export default roomRouter;

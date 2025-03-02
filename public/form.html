@@ -204,6 +204,14 @@
                             input: "text",
                             icon: 'info',
                             preConfirm: async (topicDay) => {
+                                fetch('/rooms/assign-topic', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({
+                                        topic: topicDay,
+                                        roomId: roomId
+                                    }),
+                                });
                             },
                             allowOutsideClick: () => !Swal.isLoading(),
                             background: 'hsl(var(--card))',
@@ -213,9 +221,8 @@
                             showCancelButton: true,
                         });
                     } else {
-                        let message = '';
+                        let message = `linked to the class of ${response.subject}`;
                         let icon = 'success'
-                        console.log(response);
                         if (!response.start) {
                             message = 'class has not started';
                             icon = 'warning';
