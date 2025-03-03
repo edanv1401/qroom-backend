@@ -199,7 +199,7 @@
                 .then((response) => {
                     if (response.role === 'teacher') {
                         Swal.fire({
-                            title: response.subject,
+                            title: response.subject + ' class',
                             text: 'What is the topic of the day?',
                             input: "text",
                             icon: 'info',
@@ -211,6 +211,13 @@
                                         topic: topicDay,
                                         roomId: roomId
                                     }),
+                                }).then(()=>{
+                                    Swal.fire({
+                                        background: 'hsl(var(--card))',
+                                        color: 'hsl(var(--card-foreground))',
+                                        confirmButtonColor: 'hsl(var(--primary))',
+                                        text: 'assigned topic'
+                                    });
                                 });
                             },
                             allowOutsideClick: () => !Swal.isLoading(),
