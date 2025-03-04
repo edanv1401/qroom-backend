@@ -237,9 +237,10 @@
                                     }),
                                 }).then(() => {
                                     Swal.fire({
-                                        title: "The Internet?",
-                                        text: students,
-                                        icon: "question"
+                                        title: "Students",
+                                        html: students,
+                                        icon: "info",
+                                        showConfirmButton: false,
                                     });
                                 });
                             },
