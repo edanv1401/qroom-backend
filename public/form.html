@@ -6,6 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class Linking | ITC</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <script>
+        const socket = io();
+        let students = '';
+        socket.on('server message', function (data) {
+            console.log('got data from server', data)
+            jsondata = data.reduce((accumulator, currentValue) => accumulator + '<li>' + currentValue + '</li>',
+                '');
+            students = jsondata;
+        });
+    </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <style>
         @layer base {
@@ -179,7 +192,18 @@
             </button>
         </form>
     </div>
-
+    <template id="my-template">
+        <swal-title>
+            List of Students
+        </swal-title>
+        <swal-html>
+            <div id="list-students"></div>
+        </swal-html>
+        <swal-icon type="warning" color="red"></swal-icon>
+        <swal-param name="allowEscapeKey" value="false" />
+        <swal-param name="customClass" value='{ "popup": "my-popup" }' />
+        <swal-function-param name="didOpen" value="popup => console.log(popup)" />
+    </template>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.getElementById('vinculateForm').addEventListener('submit', function (e) {
@@ -211,12 +235,11 @@
                                         topic: topicDay,
                                         roomId: roomId
                                     }),
-                                }).then(()=>{
+                                }).then(() => {
                                     Swal.fire({
-                                        background: 'hsl(var(--card))',
-                                        color: 'hsl(var(--card-foreground))',
-                                        confirmButtonColor: 'hsl(var(--primary))',
-                                        text: 'assigned topic'
+                                        title: "The Internet?",
+                                        text: students,
+                                        icon: "question"
                                     });
                                 });
                             },
@@ -233,14 +256,22 @@
                         if (!response.start) {
                             message = 'class has not started';
                             icon = 'warning';
+                            Swal.fire({
+                                title: 'Success!',
+                                text: message,
+                                icon: icon,
+                                background: 'hsl(var(--card))',
+                                color: 'hsl(var(--card-foreground))',
+                                confirmButtonColor: 'hsl(var(--primary))',
+                            });
+                            return;
                         }
+
                         Swal.fire({
-                            title: 'Success!',
-                            text: message,
-                            icon: icon,
-                            background: 'hsl(var(--card))',
-                            color: 'hsl(var(--card-foreground))',
-                            confirmButtonColor: 'hsl(var(--primary))',
+                            title: "Students",
+                            html: students,
+                            icon: "info",
+                            showConfirmButton: false,
                         });
                     }
                     document.getElementById('email').value = '';

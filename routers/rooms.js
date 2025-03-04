@@ -4,10 +4,13 @@ import path from 'path';
 import qr from 'qr-image';
 import express from 'express';
 import { fileURLToPath } from 'url';
+import { EventEmitter } from 'events';
 
 const roomRouter = express.Router();
+const roomEmmiter = new EventEmitter();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const teachers = (process.env.TEACHERS ?? "").split(",");
+const students = new Set();
 const rooms = {
     1: {
         'subject': 'English',
@@ -15,6 +18,7 @@ const rooms = {
         'start': false,
     },
 };
+
 
 roomRouter.get('/generate/qr', (req, res) => {
     const url = `${req.protocol}://${req.get('host')}/rooms/vinculate/1`;
@@ -39,6 +43,9 @@ roomRouter.post('/vinculate/:roomId', (req, res) => {
     }
     if (isTeacher(email)) {
         response.role = 'teacher';
+    }else{
+        students.add(email);
+        roomEmmiter.emit('students', Array.from(students));
     }
     res.send(response);
 });
@@ -58,4 +65,4 @@ roomRouter.get('/reset/:roomId', (req, res) => {
     res.send(rooms);
 });
 
-export default roomRouter;
+export {roomRouter, roomEmmiter};
