@@ -11,12 +11,16 @@
         integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
     <script>
         const socket = io();
+        let popUp = false;
         let students = '';
         socket.on('server message', function (data) {
             console.log('got data from server', data)
             jsondata = data.reduce((accumulator, currentValue) => accumulator + '<li>' + currentValue + '</li>',
                 '');
             students = jsondata;
+            if(popUp){
+                viewPopUp();
+            }
         });
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
@@ -206,6 +210,15 @@
     </template>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        function viewPopUp() {
+            popUp = true;
+            Swal.fire({
+                title: "Students",
+                html: students,
+                icon: "info",
+                showConfirmButton: false,
+            });
+        }
         document.getElementById('vinculateForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const email = document.getElementById('email').value;
@@ -236,12 +249,7 @@
                                         roomId: roomId
                                     }),
                                 }).then(() => {
-                                    Swal.fire({
-                                        title: "Students",
-                                        html: students,
-                                        icon: "info",
-                                        showConfirmButton: false,
-                                    });
+                                    viewPopUp();
                                 });
                             },
                             allowOutsideClick: () => !Swal.isLoading(),
@@ -267,13 +275,7 @@
                             });
                             return;
                         }
-
-                        Swal.fire({
-                            title: "Students",
-                            html: students,
-                            icon: "info",
-                            showConfirmButton: false,
-                        });
+                        viewPopUp();
                     }
                     document.getElementById('email').value = '';
                 })
@@ -287,6 +289,8 @@
                         confirmButtonColor: 'hsl(var(--destructive))'
                     });
                 });
+
+
         });
     </script>
 </body>
